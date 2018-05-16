@@ -6,9 +6,12 @@ const Nav = () => {
     <div>
       Navigation
       <ul>
-      <li>
-      <Link to='/'>Home</Link>
-      </li>
+        <li>
+          <Link to='/'>Home</Link>
+        </li>
+        <li>
+          <Link to='/gyms'>Gyms</Link>
+        </li>
       </ul>
     </div>
   );

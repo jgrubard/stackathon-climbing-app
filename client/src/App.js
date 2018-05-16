@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { getUsersFromServer, getGymsFromServer } from '../store';
 import { connect } from 'react-redux';
 
 import Nav from './Nav';
 import Home from './Home';
+import Gyms from './Gym/Gyms';
 
 class App extends Component {
 
@@ -19,7 +20,10 @@ class App extends Component {
       <Router>
         <div>
           <Route component={Nav} />
-          <Route exact path='/' component={Home} />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/gyms' component={Gyms} />
+          </Switch>
         </div>
       </Router>
     );
