@@ -5,7 +5,8 @@ const path = require('path');
 const db = require('./db')
 
 app.use('/dist', express.static(path.join(__dirname, '../dist')))
-app.use('/vendor', express.static(path.join(__dirname, '../node_modules')))
+app.use('/vendors', express.static(path.join(__dirname, '../node_modules')))
+app.use('/vendors', express.static(path.join(__dirname, '/client/public')))
 
 app.use('/api', require('./routes'))
 
