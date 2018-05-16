@@ -1,4 +1,4 @@
-const { conn } = '../conn';
+const { conn, Sequelize } = require('../conn');
 
 const Gym = conn.define('gyms', {
   name: {

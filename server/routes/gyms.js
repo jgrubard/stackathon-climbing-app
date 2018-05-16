@@ -1,6 +1,6 @@
 const app = require('express').Router();
+const { Gym } = require('../db').models;
 module.exports = app;
-const Gym = require('../db').models;
 
 app.get('/', (req, res, next) => {
   Gym.findAll()
