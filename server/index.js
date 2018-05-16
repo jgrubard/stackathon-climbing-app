@@ -7,6 +7,8 @@ const db = require('./db')
 app.use('/dist', express.static(path.join(__dirname, '../dist')))
 app.use('/vendor', express.static(path.join(__dirname, '../node_modules')))
 
+app.use('/api', require('./routes'))
+
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, '../client/public/index.html')))
 
 const port = process.env.PORT || 3000;
