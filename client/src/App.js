@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import { getUsersFromServer } from '../store';
+import { getUsersFromServer, getGymsFromServer } from '../store';
 import { connect } from 'react-redux';
 
 import Nav from './Nav';
@@ -9,8 +9,9 @@ import Home from './Home';
 class App extends Component {
 
   componentDidMount() {
-    const { getUsers } = this.props;
+    const { getUsers, getGyms } = this.props;
     getUsers();
+    getGyms();
   }
 
   render() {
@@ -27,7 +28,8 @@ class App extends Component {
 
 const mapDispatch = (dispatch) => {
   return {
-    getUsers: () => dispatch(getUsersFromServer())
+    getUsers: () => dispatch(getUsersFromServer()),
+    getGyms: () => dispatch(getGymsFromServer())
   }
 }
 
