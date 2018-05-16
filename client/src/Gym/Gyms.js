@@ -6,10 +6,12 @@ import GymCard from './GymCard';
 const Gyms = ({ gyms }) => {
   return (
     <div>
-      <ul>
+      <ul className='list-group'>
         {
           gyms.map(gym => (
-            <GymCard gym={gym} key={gym.id} />
+            <li key={gym.id} className='list-group-item'>
+              <GymCard gym={gym} />
+            </li>
           ))
         }
       </ul>
