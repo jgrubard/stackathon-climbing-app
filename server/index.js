@@ -12,6 +12,11 @@ app.use('/api', require('./routes'))
 
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, '../client/public/index.html')))
 
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(err.status || 500).send(err);
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
