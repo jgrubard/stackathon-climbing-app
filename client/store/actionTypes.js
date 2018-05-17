@@ -3,3 +3,5 @@ export const GET_USERS = 'GET_USERS';
 export const GET_GYMS = 'GET_GYMS';
 
 export const SET_USER = 'SET_USER';
+export const CREATE_USER = 'CREATE_USER';
+export const UPDATE_USER = 'UPDATE_USER';

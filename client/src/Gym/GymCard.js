@@ -5,6 +5,7 @@ const GymCard = ({ gym }) => {
   return (
     <div>
       {gym.name}
+      <button className='btn btn-primary'>Check In</button>
     </div>
   );
 }
@@ -15,4 +16,10 @@ const mapState = (state, { gym }) => {
   }
 }
 
-export default connect(mapState)(GymCard);
+const mapDispatch = (dispatch) => {
+  return {
+    // checkIn: () dispatch()
+  }
+}
+
+export default connect(mapState, mapDispatch)(GymCard);

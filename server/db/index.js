@@ -2,6 +2,8 @@ const { conn } = require('./conn');
 const User = require('./models/User');
 const Gym = require('./models/Gym');
 
+User.belongsTo(Gym)
+
 const syncAndSeed = () => {
   return conn.sync({ force: true })
     .then(() => {

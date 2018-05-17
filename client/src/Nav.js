@@ -1,29 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LoginForm from './Users/LoginForm';
+// import LoginForm from './Users/LoginForm';
 import { connect } from 'react-redux';
 import { logout } from '../store';
 
 const Nav = ({ user, isLogged, logout }) => {
   return (
     <div>
-      Navigation
-      <ul>
-        <li>
-          <Link to='/'>Home</Link>
+      <ul className='nav'>
+        <li className='nav-item'>
+          <Link to='/' className='nav-link'>Home</Link>
         </li>
-        <li>
-          <Link to='/gyms'>Gyms</Link>
+        <li className='nav-item'>
+          <Link to='/gyms' className='nav-link'>Gyms</Link>
         </li>
         {
-          !isLogged ? (
-            <LoginForm />
-          ) : (
+          isLogged ? (
             <div>
               <button className='btn btn-secondary' onClick={logout}>
                 Logout
               </button>
-              {user.username}
+              <span>Welcome {user.username}!</span>
+            </div>
+          ) : (
+            <div>
+              <Link to='/login'>
+                <button className='btn btn-secondary'>Login</button>
+              </Link>
+              <button className='btn btn-secondary'>Sign Up</button>
             </div>
           )
         }

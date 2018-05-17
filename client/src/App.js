@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Nav from './Nav';
 import Home from './Home';
 import Gyms from './Gym/Gyms';
+import LoginForm from './Users/LoginForm';
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/gyms' component={Gyms} />
+            <Route exact path='/login' component={LoginForm} />
           </Switch>
         </div>
       </Router>
