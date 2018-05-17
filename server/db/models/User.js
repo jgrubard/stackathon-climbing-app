@@ -1,9 +1,12 @@
 const { Sequelize, conn } = require('../conn');
 
 const User = conn.define('user', {
-  name: {
+  username: {
     type: Sequelize.STRING
-  }
+  },
+  password: {
+    type: Sequelize.STRING
+  },
 }, {
   timestamps: false
 });

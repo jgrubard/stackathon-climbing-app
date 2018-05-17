@@ -6,8 +6,8 @@ const syncAndSeed = () => {
   return conn.sync({ force: true })
     .then(() => {
       return Promise.all([
-        User.create({ name: 'Jeremy' }),
-        User.create({ name: 'Supattra' }),
+        User.create({ username: 'jeremy', password: 'jeremy' }),
+        User.create({ username: 'supattra', password: 'supattra' }),
         Gym.create({ name: 'Cliffs LIC' }),
         Gym.create({ name: 'Brooklyn Boulders' })
       ])
