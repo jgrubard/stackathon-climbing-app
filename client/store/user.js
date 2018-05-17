@@ -13,10 +13,11 @@ export const getUserFromToken = (token) => {
 
 export const attemptLogin = (credentials) => {
   return dispatch => {
-    axios.post('/api/sessions', credentials)
+    return axios.post('/api/sessions', credentials)
       .then(res => res.data)
       .then(token => window.localStorage.setItem('token', token))
       .then(() => dispatch(getUserFromToken(window.localStorage.getItem('token'))))
+      .catch(err => console.log({err}))
   };
 };
 
@@ -27,7 +28,7 @@ export const logout = () => {
   }
 }
 
-export const userReducer = (state = {}, action) => {
+const userReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_USER:
       state = action.user;
@@ -35,3 +36,5 @@ export const userReducer = (state = {}, action) => {
   }
   return state;
 };
+
+export default userReducer;

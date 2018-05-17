@@ -4,9 +4,7 @@ module.exports = app;
 
 const jwt = require('jwt-simple');
 
-const error = { status: 401 };
-
-app.get('/api/sessions/:token', (req, res, next) => {
+app.get('/:token', (req, res, next) => {
   try {
     const id = jwt.decode(req.params.token, 'foo').id;
     User.findById(id)
@@ -14,6 +12,7 @@ app.get('/api/sessions/:token', (req, res, next) => {
         if (user) {
           return res.send(user);
         }
+        const error = { status: 401 };
         throw error;
       })
   } catch (ex) {
@@ -21,12 +20,15 @@ app.get('/api/sessions/:token', (req, res, next) => {
   }
 });
 
-app.post('/api/sessions', (req, res, next) => {
+app.post('/', (req, res, next) => {
   User.findOne({ where: req.body })
     .then(user => {
       if (user) {
         const token = jwt.encode({ id: user.id }, 'foo');
         return res.send(token)
       }
+      const error = { status: 401 };
       throw error;
+    })
+    .catch(next);
 });

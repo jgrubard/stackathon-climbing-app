@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import { getUsersFromServer, getGymsFromServer } from '../store';
+import { getUsersFromServer, getGymsFromServer, getUserFromToken } from '../store';
 import { connect } from 'react-redux';
 
 import Nav from './Nav';
@@ -10,9 +10,10 @@ import Gyms from './Gym/Gyms';
 class App extends Component {
 
   componentDidMount() {
-    const { getUsers, getGyms } = this.props;
+    const { getUsers, getGyms, getUser } = this.props;
     getUsers();
     getGyms();
+    getUser();
   }
 
   render() {
@@ -32,6 +33,12 @@ class App extends Component {
 
 const mapDispatch = (dispatch) => {
   return {
+    getUser: () => {
+      const token = window.localStorage.getItem('token')
+      if (token) {
+        dispatch(getUserFromToken(token))
+      }
+    },
     getUsers: () => dispatch(getUsersFromServer()),
     getGyms: () => dispatch(getGymsFromServer())
   }
