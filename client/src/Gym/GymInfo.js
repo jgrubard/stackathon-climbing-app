@@ -11,25 +11,26 @@ const GymInfo = ({ loggedUser, gym, checkedInUsers, createRequest, ownRequests, 
         {
           checkedInUsers.map(user => {
             const request = ownRequests.find(request => request.partnerId === user.id);
-            console.log('REQUEST:', request);
             return (
               <li key={user.id} className='list-group-item'>
-                {user.username} { user.id === loggedUser.id ? ' - This is you!' : null }
+                {user.username}
                 {
-                  request ? (
-                    <button
-                      className='btn btn-warning'
-                      onClick={() => deleteRequest(request)}
-                    >
-                      delete request
-                    </button>
-                  ) : (
-                    <button
-                      className='btn btn-primary'
-                      onClick={() => createRequest({ userId: loggedUser.id, partnerId: user.id })}
-                    >
-                      send request
-                    </button>
+                  user.id === loggedUser.id ? ' - This is you!' : (
+                    request ? (
+                      <button
+                        className='btn btn-warning'
+                        onClick={() => deleteRequest(request)}
+                      >
+                        delete request
+                      </button>
+                    ) : (
+                      <button
+                        className='btn btn-primary'
+                        onClick={() => createRequest({ userId: loggedUser.id, partnerId: user.id })}
+                      >
+                        send request
+                      </button>
+                    )
                   )
                 }
               </li>

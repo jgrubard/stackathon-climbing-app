@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { updateUserOnServer, updateLoggedUser } from '../../store';
+import { updateUserOnServer, updateLoggedUser, deleteRequestOnServer } from '../../store';
 
-const GymCard = ({ user, gym, checkIn }) => {
+const GymCard = ({ user, gym, checkIn, checkOut, usersRequests }) => {
   const { id, username, password } = user;
   return (
     <div>
@@ -14,7 +14,7 @@ const GymCard = ({ user, gym, checkIn }) => {
         user.gymId === gym.id ? (
           <button
             className='btn btn-warning'
-            onClick={() => checkIn({ id, username, password, gymId: null })}
+            onClick={() => checkOut({ id, username, password, gymId: null }, usersRequests)}
           >
             Check Out
           </button>
@@ -32,10 +32,12 @@ const GymCard = ({ user, gym, checkIn }) => {
   );
 }
 
-const mapState = ({ user }, { gym }) => {
+const mapState = ({ user, requests }, { gym }) => {
+  const usersRequests = requests.filter(request => user.id === request.userId || user.id === request.partnerId)
   return {
     user,
-    gym
+    gym,
+    usersRequests
   }
 }
 
@@ -44,6 +46,13 @@ const mapDispatch = (dispatch) => {
     checkIn: (user) => {
       dispatch(updateUserOnServer(user))
       dispatch(updateLoggedUser(user))
+    },
+    checkOut: (user, requests) => {
+      dispatch(updateUserOnServer(user))
+      dispatch(updateLoggedUser(user))
+      requests.forEach(request => {
+        dispatch(deleteRequestOnServer(request))
+      })
     }
   }
 }
