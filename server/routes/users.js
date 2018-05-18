@@ -7,3 +7,19 @@ app.get('/', (req, res, next) => {
     .then(users => res.send(users))
     .catch(next);
 });
+
+app.post('/', (req, res, next) => {
+  User.create(req.body)
+    .then(user => res.send(user))
+    .catch(next);
+});
+
+app.put('/:id', (req, res, next) => {
+  User.findById(req.params.id)
+    .then(user => {
+      Object.assign(user, req.body);
+      return user.save();
+    })
+    .then(user => res.send(user))
+    .catch(next);
+});

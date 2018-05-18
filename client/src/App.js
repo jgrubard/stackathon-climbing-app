@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import { getUsersFromServer, getGymsFromServer, getUserFromToken } from '../store';
+import { getUsersFromServer, getGymsFromServer, getUserFromToken, getRequestsFromServer } from '../store';
 import { connect } from 'react-redux';
 
 import Nav from './Nav';
 import Home from './Home';
 import Gyms from './Gym/Gyms';
+import GymInfo from './Gym/GymInfo';
+import LoginForm from './Users/LoginForm';
 
 class App extends Component {
 
   componentDidMount() {
-    const { getUsers, getGyms, getUser } = this.props;
+    const { getUsers, getGyms, getUser, getRequests } = this.props;
     getUsers();
     getGyms();
     getUser();
+    getRequests();
   }
 
   render() {
@@ -24,6 +27,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/gyms' component={Gyms} />
+            <Route exact path='/gyms/:id' component={({ match }) => <GymInfo gymId={ match.params.id * 1}/> } />
+            <Route exact path='/login' component={LoginForm} />
           </Switch>
         </div>
       </Router>
@@ -40,7 +45,8 @@ const mapDispatch = (dispatch) => {
       }
     },
     getUsers: () => dispatch(getUsersFromServer()),
-    getGyms: () => dispatch(getGymsFromServer())
+    getGyms: () => dispatch(getGymsFromServer()),
+    getRequests: () => dispatch(getRequestsFromServer())
   }
 }
 
