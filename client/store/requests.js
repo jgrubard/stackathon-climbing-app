@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { GET_REQUESTS, CREATE_REQUEST } from './actionTypes';
+import { GET_REQUESTS, CREATE_REQUEST, DELETE_REQUEST } from './actionTypes';
 
 const getRequests = (requests) => ({ type: GET_REQUESTS, requests });
 const createRequest = (request) => ({ type: CREATE_REQUEST, request});
+const deleteRequest = (request) => ({ type: DELETE_REQUEST, request});
 
 export const getRequestsFromServer = () => {
   return dispatch => {
@@ -27,6 +28,13 @@ export const createRequestOnServer = (request) => {
   }
 }
 
+export const deleteRequestOnServer = (request) => {
+  return dispatch => {
+    return axios.delete(`/api/requests/${request.id}`)
+      .then(() => dispatch(deleteRequest(request)))
+  }
+}
+
 const requestsReducer = (state = [], action) => {
   switch (action.type) {
     case GET_REQUESTS:
@@ -34,6 +42,9 @@ const requestsReducer = (state = [], action) => {
       break;
     case CREATE_REQUEST:
       state = [ ...state, action.request ];
+      break;
+    case DELETE_REQUEST:
+      state = state.filter(request => request.id !== action.request.id);
       break;
   }
   return state;

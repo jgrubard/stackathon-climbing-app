@@ -13,4 +13,11 @@ app.post('/', (req, res, next) => {
   Request.create(req.body)
     .then(request => res.send(request))
     .catch(next);
-})
+});
+
+app.delete('/:id', (req, res, next) => {
+  Request.findById(req.params.id)
+    .then(request => request.destroy())
+    .then(() => res.sendStatus(204))
+    .catch(next);
+});

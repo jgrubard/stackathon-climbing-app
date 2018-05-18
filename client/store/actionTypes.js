@@ -7,4 +7,4 @@ export const UPDATE_USER = 'UPDATE_USER';
 
 export const GET_REQUESTS = 'GET_REQUESTS';
 export const CREATE_REQUEST = 'CREATE_REQUEST';
-
+export const DELETE_REQUEST = 'DELETE_REQUEST';
