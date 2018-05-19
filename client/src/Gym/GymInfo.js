@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createRequestOnServer, deleteRequestOnServer } from '../../store';
+import { updateRequestOnServer, deleteRequestOnServer } from '../../store';
+import moment from 'moment';
 
 const GymInfo = ({ loggedUser, gym, checkedInUsers, createRequest, ownRequests, deleteRequest }) => {
   return (
@@ -13,9 +14,8 @@ const GymInfo = ({ loggedUser, gym, checkedInUsers, createRequest, ownRequests, 
             const request = ownRequests.find(request => request.partnerId === user.id);
             return (
               <li key={user.id} className='list-group-item'>
-                {user.username}
                 {
-                  user.id === loggedUser.id ? ' - This is you!' : (
+                  user.id === loggedUser.id ? null : (
                     request ? (
                       <button
                         className='btn btn-warning'
@@ -26,13 +26,14 @@ const GymInfo = ({ loggedUser, gym, checkedInUsers, createRequest, ownRequests, 
                     ) : (
                       <button
                         className='btn btn-primary'
-                        onClick={() => createRequest({ userId: loggedUser.id, partnerId: user.id })}
+                        onClick={() => createRequest({ userId: loggedUser.id, partnerId: user.id, date: moment(Date.now()).format('dddd, MMMM Do YYYY, h:mm a'), gymId: gym.id })}
                       >
                         send request
                       </button>
                     )
                   )
                 }
+                &nbsp;{user.username}{ user.id === loggedUser.id && ' - This is you!'}
               </li>
             );
           })
@@ -57,7 +58,7 @@ const mapState = ({ user, users, gyms, requests }, { gymId }) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    createRequest: (request) => dispatch(createRequestOnServer(request)),
+    createRequest: (request) => dispatch(updateRequestOnServer(request)),
     deleteRequest: (request) => dispatch(deleteRequestOnServer(request))
   }
 }

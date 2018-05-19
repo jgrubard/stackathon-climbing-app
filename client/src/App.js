@@ -7,6 +7,7 @@ import Nav from './Nav';
 import Home from './Home';
 import Gyms from './Gym/Gyms';
 import GymInfo from './Gym/GymInfo';
+import Requests from './Users/Requests';
 import LoginForm from './Users/LoginForm';
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
             <Route exact path='/' component={Home} />
             <Route exact path='/gyms' component={Gyms} />
             <Route exact path='/gyms/:id' component={({ match }) => <GymInfo gymId={ match.params.id * 1}/> } />
+            <Route exact path='/users/:id/requests' component={({ match }) => <Requests id={ match.params.id * 1}/> } />
             <Route exact path='/login' component={LoginForm} />
           </Switch>
         </div>

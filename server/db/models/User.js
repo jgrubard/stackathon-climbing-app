@@ -7,6 +7,9 @@ const User = conn.define('user', {
   password: {
     type: Sequelize.STRING
   },
+  image: {
+    type: Sequelize.TEXT
+  }
 }, {
   timestamps: false
 });

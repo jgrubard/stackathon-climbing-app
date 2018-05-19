@@ -9,9 +9,17 @@ app.get('/', (req, res, next) => {
 });
 
 app.post('/', (req, res, next) => {
-  console.log('**req.body**:', req.body)
   Request.create(req.body)
     .then(request => res.send(request))
+    .catch(next);
+});
+
+app.put('/:id', (req, res, next) => {
+  Request.findById(req.params.id)
+    .then(request => {
+      Object.assign(request, req.body)
+      return request.save();
+    })
     .catch(next);
 });
 

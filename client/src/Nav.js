@@ -15,7 +15,9 @@ const Nav = ({ user, isLogged, logout, requestCount }) => {
         </li>
         { isLogged ? (
             <li className='nav-item'>
-              Requests: ({requestCount})
+              <Link to={`/users/${user.id}/requests`} className='nav-link'>
+                Requests <span className='badge badge-primary'>{requestCount}</span>
+              </Link>
             </li>
           ) : null
         }
@@ -36,7 +38,6 @@ const Nav = ({ user, isLogged, logout, requestCount }) => {
             </li>
           )
         }
-
       </ul>
     </div>
   );
@@ -44,7 +45,7 @@ const Nav = ({ user, isLogged, logout, requestCount }) => {
 
 const mapState = ({ user, requests }) => {
   const requestCount = requests.reduce((memo, request) => {
-    if(request.partnerId === user.id) {
+    if (request.partnerId === user.id && !request.declined) {
       memo++;
     }
     return memo;
