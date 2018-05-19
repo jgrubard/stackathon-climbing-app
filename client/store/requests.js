@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { GET_REQUESTS, CREATE_REQUEST, DELETE_REQUEST } from './actionTypes';
+import socket from '../socket'
 
 const getRequests = (requests) => ({ type: GET_REQUESTS, requests });
 const createRequest = (request) => ({ type: CREATE_REQUEST, request});
@@ -14,16 +15,12 @@ export const getRequestsFromServer = () => {
 }
 
 export const createRequestOnServer = (request) => {
-  console.log('THUNK:', request);
   return dispatch => {
     return axios.post('/api/requests', request)
-      .then(res => {
-        console.log('res.data:', res.data)
-        return res.data
-      })
+      .then(res => res.data)
       .then(request => {
-        console.log('before dispatch:', request)
         dispatch(createRequest(request))
+        socket.emit('get-request', request)
       })
   }
 }
@@ -31,7 +28,10 @@ export const createRequestOnServer = (request) => {
 export const deleteRequestOnServer = (request) => {
   return dispatch => {
     return axios.delete(`/api/requests/${request.id}`)
-      .then(() => dispatch(deleteRequest(request)))
+      .then(() => {
+        dispatch(deleteRequest(request))
+        socket.emit('remove-request', request)
+      })
   }
 }
 
