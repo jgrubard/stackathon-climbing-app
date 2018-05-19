@@ -7,5 +7,8 @@ module.exports = (io) => {
     socket.on('update-users', () => {
       socket.broadcast.emit('update-users')
     })
+    socket.on('send-notification', (name) => {
+      socket.broadcast.emit('send-notification')
+    })
   });
 }

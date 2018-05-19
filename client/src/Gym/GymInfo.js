@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateRequestOnServer, deleteRequestOnServer } from '../../store';
+import moment from 'moment';
 
 const GymInfo = ({ loggedUser, gym, checkedInUsers, createRequest, ownRequests, deleteRequest }) => {
   return (
@@ -25,7 +26,7 @@ const GymInfo = ({ loggedUser, gym, checkedInUsers, createRequest, ownRequests, 
                     ) : (
                       <button
                         className='btn btn-primary'
-                        onClick={() => createRequest({ userId: loggedUser.id, partnerId: user.id, date: Date.now(), gymId: gym.id })}
+                        onClick={() => createRequest({ userId: loggedUser.id, partnerId: user.id, date: moment(Date.now()).format('dddd, MMMM Do YYYY, h:mm a'), gymId: gym.id })}
                       >
                         send request
                       </button>

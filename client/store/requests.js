@@ -23,18 +23,8 @@ export const updateRequestOnServer = (request) => {
   return dispatch => {
     return axios[method](url, request)
       .then(res => res.data)
-      .then(request => {
-        dispatch(action(request))
-        // socket.emit('update-requests')
-      })
-      .then(() => {
-        // dispatch(getRequestsFromServer())
-        socket.emit('update-requests')
-      })
-      // .then(() => {
-        // socket.emit('update-requests')
-        // dispatch(getRequestsFromServer())
-      // })
+      .then(request => dispatch(action(request)))
+      .then(() => socket.emit('update-requests'))
       .catch(err => console.error({err}))
   }
 }
