@@ -20,7 +20,7 @@ export const createRequestOnServer = (request) => {
       .then(res => res.data)
       .then(request => {
         dispatch(createRequest(request))
-        socket.emit('get-request', request)
+        socket.emit('update-requests')
       })
   }
 }
@@ -30,7 +30,7 @@ export const deleteRequestOnServer = (request) => {
     return axios.delete(`/api/requests/${request.id}`)
       .then(() => {
         dispatch(deleteRequest(request))
-        socket.emit('remove-request', request)
+        socket.emit('update-requests')
       })
   }
 }
