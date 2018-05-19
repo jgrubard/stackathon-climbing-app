@@ -13,9 +13,8 @@ const GymInfo = ({ loggedUser, gym, checkedInUsers, createRequest, ownRequests, 
             const request = ownRequests.find(request => request.partnerId === user.id);
             return (
               <li key={user.id} className='list-group-item'>
-                {user.username}
                 {
-                  user.id === loggedUser.id ? ' - This is you!' : (
+                  user.id === loggedUser.id ? null : (
                     request ? (
                       <button
                         className='btn btn-warning'
@@ -33,6 +32,7 @@ const GymInfo = ({ loggedUser, gym, checkedInUsers, createRequest, ownRequests, 
                     )
                   )
                 }
+                &nbsp;{user.username}{ user.id === loggedUser.id && ' - This is you!'}
               </li>
             );
           })

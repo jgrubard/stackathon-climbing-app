@@ -15,7 +15,9 @@ const Nav = ({ user, isLogged, logout, requestCount }) => {
         </li>
         { isLogged ? (
             <li className='nav-item'>
-              Requests: ({requestCount})
+              <Link to={`/users/${user.id}/requests`} className='nav-link'>
+                Requests <span className='badge badge-primary'>{requestCount}</span>
+              </Link>
             </li>
           ) : null
         }
