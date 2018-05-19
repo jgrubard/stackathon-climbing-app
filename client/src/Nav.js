@@ -38,7 +38,6 @@ const Nav = ({ user, isLogged, logout, requestCount }) => {
             </li>
           )
         }
-
       </ul>
     </div>
   );
@@ -46,7 +45,7 @@ const Nav = ({ user, isLogged, logout, requestCount }) => {
 
 const mapState = ({ user, requests }) => {
   const requestCount = requests.reduce((memo, request) => {
-    if(request.partnerId === user.id) {
+    if (request.partnerId === user.id && !request.declined) {
       memo++;
     }
     return memo;

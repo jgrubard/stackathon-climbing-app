@@ -1,5 +1,6 @@
 import { GET_USERS, CREATE_USER, UPDATE_USER } from './actionTypes';
 import axios from 'axios';
+import socket from '../socket'
 
 const getUsers = (users) => ({ type: GET_USERS, users });
 const createUser = (user) => ({ type: CREATE_USER, user});
@@ -21,7 +22,10 @@ export const updateUserOnServer = (user) => {
   return dispatch => {
     return axios[method](url, user)
       .then(res => res.data)
-      .then(user => dispatch(action(user)))
+      .then(user => {
+        dispatch(action(user))
+        socket.emit('update-users');
+      })
       .catch(err => console.log({ err }))
   }
 }

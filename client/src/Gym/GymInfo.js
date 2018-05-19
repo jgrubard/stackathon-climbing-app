@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createRequestOnServer, deleteRequestOnServer } from '../../store';
+import { updateRequestOnServer, deleteRequestOnServer } from '../../store';
 
 const GymInfo = ({ loggedUser, gym, checkedInUsers, createRequest, ownRequests, deleteRequest }) => {
   return (
@@ -25,7 +25,7 @@ const GymInfo = ({ loggedUser, gym, checkedInUsers, createRequest, ownRequests, 
                     ) : (
                       <button
                         className='btn btn-primary'
-                        onClick={() => createRequest({ userId: loggedUser.id, partnerId: user.id })}
+                        onClick={() => createRequest({ userId: loggedUser.id, partnerId: user.id, date: Date.now(), gymId: gym.id })}
                       >
                         send request
                       </button>
@@ -57,7 +57,7 @@ const mapState = ({ user, users, gyms, requests }, { gymId }) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    createRequest: (request) => dispatch(createRequestOnServer(request)),
+    createRequest: (request) => dispatch(updateRequestOnServer(request)),
     deleteRequest: (request) => dispatch(deleteRequestOnServer(request))
   }
 }

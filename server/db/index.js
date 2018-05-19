@@ -7,7 +7,7 @@ User.belongsTo(Gym)
 // User.belongsToMany(User, { as: 'partner', through: Request })
 Request.belongsTo(User, { as: 'user'});
 Request.belongsTo(User, { as: 'partner'});
-
+Request.belongsTo(Gym);
 
 const syncAndSeed = () => {
   return conn.sync({ force: true })

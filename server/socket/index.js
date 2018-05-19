@@ -4,5 +4,8 @@ module.exports = (io) => {
     socket.on('update-requests', () => {
       socket.broadcast.emit('update-requests')
     });
+    socket.on('update-users', () => {
+      socket.broadcast.emit('update-users')
+    })
   });
 }
