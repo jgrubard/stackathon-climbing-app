@@ -14,7 +14,7 @@ app.use('/dist', express.static(path.join(__dirname, '../dist')))
 app.use('/vendors', express.static(path.join(__dirname, '../node_modules')))
 app.use('/vendors', express.static(path.join(__dirname, '/client/public')))
 
-app.use(require('body-parser').json());
+app.use(require('body-parser').json({ limit: '10mb' }));
 app.use(require('body-parser').urlencoded({ extended: true }));
 
 app.use('/api', require('./routes'))

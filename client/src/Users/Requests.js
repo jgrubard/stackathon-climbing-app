@@ -15,6 +15,7 @@ const Requests = ({ users, ownRequests, id }) => {
                 &nbsp;
                 <button className='btn btn-danger'>Reject</button>
                 &nbsp;{user.username}
+                <img src={user.image} height='200px' width='auto' />
               </li>
             );
           })

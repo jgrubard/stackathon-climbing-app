@@ -22,6 +22,7 @@ export const updateUserOnServer = (user) => {
     return axios[method](url, user)
       .then(res => res.data)
       .then(user => dispatch(action(user)))
+      .catch(err => console.log({ err }))
   }
 }
 
