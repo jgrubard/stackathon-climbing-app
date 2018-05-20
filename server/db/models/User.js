@@ -9,7 +9,17 @@ const User = conn.define('user', {
   },
   image: {
     type: Sequelize.TEXT
-  }
+  },
+  boulder: {
+    type: Sequelize.STRING
+  },
+  top: {
+    type: Sequelize.STRING
+  },
+  lead: {
+    type: Sequelize.STRING
+  },
+
 }, {
   timestamps: false
 });

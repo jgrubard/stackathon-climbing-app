@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateUserOnServer } from '../store';
+import LoginForm from './Users/LoginForm';
 
 class Home extends Component {
   constructor() {
@@ -34,30 +35,41 @@ class Home extends Component {
 
   render() {
     const { addPhoto, savePhoto } = this;
-    console.log('user:', this.props.user)
+    const { isLogged } = this.props;
+    const { image } = this.state;
     return (
-      <div>
-        <h3>Welcome to betaTogether</h3>
-        <h4>Upload Today's Photo!</h4>
-        <p>upload here</p>
-          <input type='file' onChange={addPhoto} />
-          <button onClick={savePhoto} className='btn btn-primary'>submit image</button>
-          {
-            this.state.image ? (
-              <div>
-                <h4>Image Preview</h4>
-                <img src={this.state.image} />
-              </div>
-            ) : null
-          }
-
+      <div className='jumbotron'>
+        <h3 className='home-title'>Welcome to beta≈Together!</h3>
+        {
+          isLogged ? (
+            <div className='image-upload'>
+              <h4>Upload Today's Photo!</h4>
+              <input type='file' onChange={addPhoto} />
+              <button onClick={savePhoto} className='btn btn-primary'>submit image</button>
+              {
+                image ? (
+                  <div>
+                    <h4>Image Preview</h4>
+                    <img src={image} />
+                  </div>
+                ) : null
+              }
+            </div>
+          ) : (
+            <div>
+              <h5 className='home-title'>Please login or sign up to get started!</h5>
+              <LoginForm />
+            </div>
+          )
+        }
       </div>
     );
   }
 }
 
 const mapState = ({ user }) => {
-  return { user }
+  const isLogged = !!user.id
+  return { user, isLogged }
 }
 
 const mapDispatch = (dispatch) => {

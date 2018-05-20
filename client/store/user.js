@@ -17,6 +17,7 @@ export const attemptLogin = (credentials) => {
       .then(res => res.data)
       .then(token => window.localStorage.setItem('token', token))
       .then(() => dispatch(getUserFromToken(window.localStorage.getItem('token'))))
+      .then(() => location.hash = '/')
       .catch(err => console.log({err}))
   };
 };
@@ -25,6 +26,7 @@ export const logout = () => {
   return dispatch => {
     window.localStorage.removeItem('token');
     dispatch(setUser({}))
+    location.hash = '/'
   }
 }
 

@@ -28,10 +28,16 @@ class LoginForm extends Component {
     const { onSubmit, onChange } = this;
     const { username, password } = this.state;
     return (
-      <div>
-        <input className='form-control' placeholder='username' name='username' value={username} onChange={onChange} />
-        <input className='form-control' placeholder='password' name='password' value={password} onChange={onChange} type='password' />
-        <button className='btn btn-success' onClick={onSubmit} >Login</button>
+      <div className='row login-signup'>
+        <div className='col' />
+        <div className='col'>
+          <input className='form-control input-sm' placeholder='username' name='username' value={username} onChange={onChange} />
+          <input className='form-control mr-sm-2' placeholder='password' name='password' value={password} onChange={onChange} type='password' />
+          <button className='btn btn-success' onClick={onSubmit}>Login</button>
+          &nbsp; &nbsp;
+          <button className='btn btn-success'>Sign Up</button>
+        </div>
+        <div className='col' />
       </div>
     );
   }

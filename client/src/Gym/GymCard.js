@@ -10,6 +10,9 @@ const GymCard = ({ user, gym, checkIn, checkOut, usersRequests }) => {
       <Link to={`/gyms/${gym.id}`}>
         {gym.name}
       </Link>
+      <p>
+        {gym.street}<br />{gym.city}<br />{gym.state}, {gym.zip}
+      </p>
       {
         user.gymId === gym.id ? (
           <button
@@ -21,7 +24,7 @@ const GymCard = ({ user, gym, checkIn, checkOut, usersRequests }) => {
         ) : (
           <button
             className='btn btn-primary'
-            onClick={() => checkIn({ id, username, password, gymId: gym.id })}
+            onClick={() => checkIn({ id, username, password, gymId: gym.id }, gym)}
           >
             Check In
           </button>
@@ -43,9 +46,10 @@ const mapState = ({ user, requests }, { gym }) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    checkIn: (user) => {
+    checkIn: (user, gym) => {
       dispatch(updateUserOnServer(user))
       dispatch(updateLoggedUser(user))
+      location.hash = `/gyms/${gym.id}`
     },
     checkOut: (user, requests) => {
       dispatch(updateUserOnServer(user))

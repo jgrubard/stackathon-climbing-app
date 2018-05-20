@@ -18,20 +18,25 @@ class App extends Component {
     getGyms();
     getUser();
     getRequests();
+    location.hash = '/'
   }
 
   render() {
     return (
       <Router>
-        <div className='container'>
+        <div>
           <Route component={Nav} />
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/gyms' component={Gyms} />
-            <Route exact path='/gyms/:id' component={({ match }) => <GymInfo gymId={ match.params.id * 1}/> } />
-            <Route exact path='/users/:id/requests' component={({ match }) => <Requests id={ match.params.id * 1}/> } />
-            <Route exact path='/login' component={LoginForm} />
-          </Switch>
+          <div>
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <div className='container'>
+                <Route exact path='/gyms' component={Gyms} />
+                <Route exact path='/gyms/:id' component={({ match }) => <GymInfo gymId={ match.params.id * 1}/> } />
+                <Route exact path='/users/:id/requests' component={({ match }) => <Requests id={ match.params.id * 1}/> } />
+                <Route exact path='/login' component={LoginForm} />
+              </div>
+            </Switch>
+          </div>
         </div>
       </Router>
     );

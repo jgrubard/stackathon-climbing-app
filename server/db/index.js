@@ -13,12 +13,48 @@ const syncAndSeed = () => {
   return conn.sync({ force: true })
     .then(() => {
       return Promise.all([
-        User.create({ username: 'jeremy', password: 'jeremy' }),
-        User.create({ username: 'supattra', password: 'supattra' }),
-        User.create({ username: 'sam', password: 'sam' }),
-        User.create({ username: 'emily', password: 'emily' }),
-        Gym.create({ name: 'Cliffs LIC' }),
-        Gym.create({ name: 'Brooklyn Boulders' })
+        User.create({
+          username: 'jeremy',
+          password: 'jeremy',
+          boulder: 'V6',
+          top: '5.11',
+          lead: '5.10'
+        }),
+        User.create({
+          username: 'supattra',
+          password: 'supattra',
+          boulder: 'V5',
+          top: '5.12',
+          lead: '5.11'
+        }),
+        User.create({
+          username: 'sam',
+          password: 'sam',
+          boulder: 'V6',
+          top: '5.11',
+          lead: '5.9'
+        }),
+        User.create({
+          username: 'emily',
+          password: 'emily',
+          boulder: 'V4',
+          top: '5.11',
+          lead: '5.9'
+        }),
+        Gym.create({
+          name: 'The Cliffs LIC',
+          street: '11-11 44th Drive',
+          city: 'Long Island City',
+          state: 'NY',
+          zip: '11101'
+        }),
+        Gym.create({
+          name: 'Brooklyn Boulders',
+          street: '575 Degraw Street',
+          city: 'Brooklyn',
+          state: 'NY',
+          zip: '11217'
+        })
       ])
     })
     .then(([ jeremy, supattra, sam, emily, cliffs, bkb]) => {

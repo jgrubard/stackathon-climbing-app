@@ -6,39 +6,36 @@ import { logout } from '../store';
 const Nav = ({ user, isLogged, logout, requestCount }) => {
   return (
     <div>
-      <ul className='nav'>
-        <li className='nav-item'>
-          <Link to='/' className='nav-link'>Home</Link>
-        </li>
-        <li className='nav-item'>
-          <Link to='/gyms' className='nav-link'>Gyms</Link>
-        </li>
-        { isLogged ? (
-            <li className='nav-item'>
-              <Link to={`/users/${user.id}/requests`} className='nav-link'>
-                Requests <span className='badge badge-primary'>{requestCount}</span>
-              </Link>
-            </li>
-          ) : null
-        }
-        {
-          isLogged ? (
-            <li className='nav-item'>
-              <button className='btn btn-secondary' onClick={logout}>
-                Logout
-              </button>
-              <span>Welcome {user.username}!</span>
-            </li>
-          ) : (
-            <li className='nav-item'>
-              <Link to='/login'>
-                <button className='btn btn-secondary'>Login</button>
-              </Link>
-              <button className='btn btn-secondary'>Sign Up</button>
-            </li>
-          )
-        }
-      </ul>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className='navbar-brand'>
+        <Link to='/' className='nav-link nav-title'>beta≈Together</Link>
+      </div>
+      {
+        isLogged ? (
+          <div className='nav-item'>
+            <Link to='/gyms' className='nav-link'>Gyms</Link>
+          </div>
+        ) : null
+      }
+      { isLogged ? (
+          <div className='nav-item'>
+            <Link to={`/users/${user.id}/requests`} className='nav-link'>
+              Requests <span className='badge badge-secondary'>{requestCount}</span>
+            </Link>
+          </div>
+        ) : null
+      }
+      {
+        isLogged ? (
+          <div className='nav-item'>
+            <button className='btn btn-secondary' onClick={logout}>
+              Logout
+            </button>
+            <span>Welcome {user.username}!</span>
+          </div>
+        ) : null
+      }
+      </nav>
     </div>
   );
 }

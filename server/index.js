@@ -13,6 +13,7 @@ require('./socket')(io);
 app.use('/dist', express.static(path.join(__dirname, '../dist')))
 app.use('/vendors', express.static(path.join(__dirname, '../node_modules')))
 app.use('/vendors', express.static(path.join(__dirname, '/client/public')))
+app.use('/stylesheets', express.static(path.join(__dirname, '../client/public/stylesheets')))
 
 app.use(require('body-parser').json({ limit: '10mb' }));
 app.use(require('body-parser').urlencoded({ extended: true }));

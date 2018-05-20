@@ -5,7 +5,6 @@ import { notify } from './store/reusableFunctions'
 const socket = io(window.location.origin);
 
 socket.on('connect', () => {
-  // console.log('I am connected to the server');
   socket.on('update-requests', () => {
     store.dispatch(getRequestsFromServer())
   })

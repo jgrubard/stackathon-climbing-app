@@ -1,0 +1,16 @@
+.home-title {
+  text-align: center;
+}
+
+.login-signup input{
+  margin: 10px 0;
+}
+
+.login-signup .col{
+  margin:10px;
+  text-align: center;
+}
+
+.image-upload {
+  text-align: center;
+}
