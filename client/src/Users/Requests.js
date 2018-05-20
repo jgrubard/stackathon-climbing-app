@@ -31,17 +31,26 @@ const Requests = ({ users, ownRequests, activeRequests, answerRequest, notify })
                         <br />
                         Lead Climbing Level: {user.lead}
                       </p>
-                      <button
-                        className='btn btn-success'
-                        onClick={() => {
-                          answerRequest({ id, declined: false, date, userId, partnerId, gymId })
-                          socket.emit('send-notification', partner.username)
-                        }}
-                      >
-                        Accept
-                      </button>
-                      &nbsp;
-                      <button className='btn btn-danger' onClick={() => answerRequest({ id, declined: true, date, userId, partnerId, gymId })}>Decline</button>
+                      {
+                        request.declined === false ? (
+                          <h4>Let's Climb!</h4>
+                        ) : (
+                          <div>
+                            <button
+                              className='btn btn-success'
+                              onClick={() => {
+                                answerRequest({ id, declined: false, date, userId, partnerId, gymId })
+                                socket.emit('notify-accepted', partner.username)
+                              }}
+                            >
+                              Accept
+                            </button>
+                            &nbsp;
+                            <button className='btn btn-danger' onClick={() => answerRequest({ id, declined: true, date, userId, partnerId, gymId })}>Decline</button>
+                          </div>
+                        )
+                      }
+
                     </div>
                     <div className='col'>
                       <img src={user.image} height='200px' width='auto' />

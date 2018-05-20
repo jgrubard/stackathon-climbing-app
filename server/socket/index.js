@@ -7,8 +7,11 @@ module.exports = (io) => {
     socket.on('update-users', () => {
       socket.broadcast.emit('update-users')
     });
-    socket.on('send-notification', (name) => {
-      socket.broadcast.emit('send-notification', name)
+    socket.on('notify-accepted', (name) => {
+      socket.broadcast.emit('notify-accepted', name)
+    });
+    socket.on('notify-request', (name) => {
+      socket.broadcast.emit('notify-request', name)
     });
   });
 }

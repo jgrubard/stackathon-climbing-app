@@ -14,6 +14,8 @@ const syncAndSeed = () => {
     .then(() => {
       return Promise.all([
         User.create({
+          firstName: 'Jeremy',
+          lastName: 'Grubard',
           username: 'jeremy',
           password: 'jeremy',
           boulder: 'V6',
@@ -21,6 +23,8 @@ const syncAndSeed = () => {
           lead: '5.10'
         }),
         User.create({
+          firstName: 'Supattra',
+          lastName: 'Samanyaphon',
           username: 'supattra',
           password: 'supattra',
           boulder: 'V5',
@@ -28,6 +32,8 @@ const syncAndSeed = () => {
           lead: '5.11'
         }),
         User.create({
+          firstName: 'Sam',
+          lastName: 'Alpert',
           username: 'sam',
           password: 'sam',
           boulder: 'V6',
@@ -35,6 +41,8 @@ const syncAndSeed = () => {
           lead: '5.9'
         }),
         User.create({
+          firstName: 'Emily',
+          lastName: 'Ferguson',
           username: 'emily',
           password: 'emily',
           boulder: 'V4',

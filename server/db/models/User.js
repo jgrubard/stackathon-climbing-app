@@ -1,6 +1,12 @@
 const { Sequelize, conn } = require('../conn');
 
 const User = conn.define('user', {
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
+  },
   username: {
     type: Sequelize.STRING
   },
@@ -18,10 +24,14 @@ const User = conn.define('user', {
   },
   lead: {
     type: Sequelize.STRING
-  },
-
+  }
 }, {
-  timestamps: false
+  timestamps: false,
+  getterMethods: {
+    fullName: function() {
+      return `${this.firstName} ${this.lastName}`
+    }
+  }
 });
 
 module.exports = User;

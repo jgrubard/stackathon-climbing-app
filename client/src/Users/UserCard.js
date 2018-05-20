@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { updateRequestOnServer, deleteRequestOnServer } from '../../store';
 import moment from 'moment';
+import socket from '../../socket';
 
 const UserCard = ({ user, gym, request, partner, deleteRequest, createRequest }) => {
   return (
     <div>
+      <h5>Climber: {partner.fullName}{ partner.id === user.id && ' (Self)' }</h5>
       <p>
-        Climber: {partner.username}{ partner.id === user.id && <b> - This is you!</b>}
+        Bouldering Level: <span className='badge badge-info'>{partner.boulder}</span>
         <br />
-        Bouldering Level: {partner.boulder}
+        Top Rope Level: <span className='badge badge-info'>{partner.top}</span>
         <br />
-        Top Rope Level: {partner.top}
-        <br />
-        Lead Climbing Level: {partner.lead}
+        Lead Climbing Level: <span className='badge badge-info'>{partner.lead}</span>
       </p>
       {
         partner.id === user.id ? null : (
@@ -27,7 +27,10 @@ const UserCard = ({ user, gym, request, partner, deleteRequest, createRequest })
           ) : (
             <button
               className='btn btn-primary'
-              onClick={() => createRequest({ userId: user.id, partnerId: partner.id, date: moment(Date.now()).format('dddd, MMMM Do YYYY, h:mm a'), gymId: gym.id })}
+              onClick={() => {
+                createRequest({ userId: user.id, partnerId: partner.id, date: moment(Date.now()).format('dddd, MMMM Do YYYY, h:mm a'), gymId: gym.id })
+                socket.emit('notify-request', user.fullName)
+              }}
             >
               send request
             </button>

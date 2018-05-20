@@ -27,11 +27,15 @@ const Nav = ({ user, isLogged, logout, requestCount }) => {
       }
       {
         isLogged ? (
+          <span className='nav-link'>Welcome, {user.firstName}</span>
+        ) : null
+      }
+      {
+        isLogged ? (
           <div className='nav-item'>
             <button className='btn btn-secondary' onClick={logout}>
               Logout
             </button>
-            <span>Welcome {user.username}!</span>
           </div>
         ) : null
       }
