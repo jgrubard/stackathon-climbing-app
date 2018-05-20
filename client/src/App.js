@@ -27,15 +27,13 @@ class App extends Component {
         <div>
           <Route component={Nav} />
           <div>
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <div className='container'>
-                <Route exact path='/gyms' component={Gyms} />
-                <Route exact path='/gyms/:id' component={({ match }) => <GymInfo gymId={ match.params.id * 1}/> } />
-                <Route exact path='/users/:id/requests' component={({ match }) => <Requests id={ match.params.id * 1}/> } />
-                <Route exact path='/login' component={LoginForm} />
-              </div>
-            </Switch>
+            <Route exact path='/' component={Home} />
+            <div className='container'>
+              <Route exact path='/gyms' component={Gyms} />
+              <Route exact path='/gyms/:id' render={ ({ match }) => <GymInfo gymId={ match.params.id * 1 } /> } />
+              <Route exact path='/users/:id/requests' render={ ({ match }) => <Requests id={ match.params.id * 1 } /> } />
+              <Route exact path='/login' component={LoginForm} />
+            </div>
           </div>
         </div>
       </Router>

@@ -20,7 +20,8 @@ const syncAndSeed = () => {
           password: 'jeremy',
           boulder: 'V6',
           top: '5.11',
-          lead: '5.10'
+          lead: '5.10',
+          location: 'Buddha Cave'
         }),
         User.create({
           firstName: 'Supattra',
@@ -29,7 +30,8 @@ const syncAndSeed = () => {
           password: 'supattra',
           boulder: 'V5',
           top: '5.12',
-          lead: '5.11'
+          lead: '5.11',
+          location: '45 Degree Wall'
         }),
         User.create({
           firstName: 'Sam',
@@ -38,7 +40,8 @@ const syncAndSeed = () => {
           password: 'sam',
           boulder: 'V6',
           top: '5.11',
-          lead: '5.9'
+          lead: '5.9',
+          location: 'Mezzanine'
         }),
         User.create({
           firstName: 'Emily',
@@ -47,7 +50,8 @@ const syncAndSeed = () => {
           password: 'emily',
           boulder: 'V4',
           top: '5.11',
-          lead: '5.9'
+          lead: '5.9',
+          location: 'The Slab'
         }),
         Gym.create({
           name: 'The Cliffs LIC',

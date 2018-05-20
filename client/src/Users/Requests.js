@@ -22,15 +22,15 @@ const Requests = ({ users, ownRequests, activeRequests, answerRequest, notify })
                   <div className='row'>
                     <div className='col'>
                       <p>{request.date}</p>
+                      <h5>Climber: {user.fullName}{ partner.id === user.id && ' (Self)' }</h5>
                       <p>
-                        Climber: {user.username}
+                        Bouldering Level: <span className='badge badge-info'>{user.boulder}</span>
                         <br />
-                        Bouldering Level: {user.boulder}
+                        Top Rope Level: <span className='badge badge-info'>{user.top}</span>
                         <br />
-                        Top Rope Level: {user.top}
-                        <br />
-                        Lead Climbing Level: {user.lead}
+                        Lead Climbing Level: <span className='badge badge-info'>{user.lead}</span>
                       </p>
+                      <p>Where you can find me: {user.location}</p>
                       {
                         request.declined === false ? (
                           <h4>Let's Climb!</h4>
@@ -40,7 +40,7 @@ const Requests = ({ users, ownRequests, activeRequests, answerRequest, notify })
                               className='btn btn-success'
                               onClick={() => {
                                 answerRequest({ id, declined: false, date, userId, partnerId, gymId })
-                                socket.emit('notify-accepted', partner.username)
+                                socket.emit('notify-accepted', partner.fullName)
                               }}
                             >
                               Accept

@@ -24,6 +24,9 @@ const User = conn.define('user', {
   },
   lead: {
     type: Sequelize.STRING
+  },
+  location: {
+    type: Sequelize.STRING
   }
 }, {
   timestamps: false,
