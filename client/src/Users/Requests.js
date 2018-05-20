@@ -22,7 +22,7 @@ const Requests = ({ users, ownRequests, activeRequests, answerRequest, notify })
                   <div className='row'>
                     <div className='col'>
                       <p>{request.date}</p>
-                      <h5>Climber: {user.fullName}{ partner.id === user.id && ' (Self)' }</h5>
+                      <h5>Climber: {user.firstName} {user.lastName}{ partner.id === user.id && ' (Self)' }</h5>
                       <p>
                         Bouldering Level: <span className='badge badge-info'>{user.boulder}</span>
                         <br />
@@ -40,7 +40,8 @@ const Requests = ({ users, ownRequests, activeRequests, answerRequest, notify })
                               className='btn btn-success'
                               onClick={() => {
                                 answerRequest({ id, declined: false, date, userId, partnerId, gymId })
-                                socket.emit('notify-accepted', partner.fullName)
+                                socket.emit('notify-accepted', partner.firstName)
+                                socket.emit('update-requests');
                               }}
                             >
                               Accept
